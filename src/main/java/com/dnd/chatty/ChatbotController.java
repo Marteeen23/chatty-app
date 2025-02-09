@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/chat")
 public class ChatbotController {
@@ -18,8 +19,9 @@ public class ChatbotController {
 
     @PostMapping
     public String chat(@RequestBody String message) {
+
         try {
-            String requestBody = "{ \"model\": \"llama3.2\", \"prompt\": \"" + message + "\", \"stream\": false }";
+            String requestBody = "{ \"model\": \"llama3.2:1B\", \"prompt\": \"" + message + "\", \"stream\": false }";
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(OLLAMA_URL))
